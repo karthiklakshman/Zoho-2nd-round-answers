@@ -1,6 +1,7 @@
 import java.util.regex.*;
 import java.io.Serializable;
 import java.io.*;
+import java.util.*;
 class ArrayList<T> implements Serializable{
     private static final long serialVersionUID = 1L;
     private T arr[];
@@ -62,22 +63,28 @@ class ArrayList<T> implements Serializable{
         this.arr = (T[]) java.lang.reflect.Array.newInstance(String.class,10);
       }
 }
-public class MyClass
+public class Main   
 {
   ArrayList<String> x =new ArrayList<>(String.class);
   ArrayList<String> y =new ArrayList<>(String.class);
   int curr=0;
+  static String url;
   
-  public static void visiturl(String url,MyClass m)
+  public static void visiturl(Main m) throws IOException
     {
-        if (!m.x.contains(url)) 
+        InputStreamReader temp0 =new InputStreamReader(System.in);
+        BufferedReader b =new BufferedReader(temp0);
+        System.out.println("Enter URL");
+        m.url=b.readLine();
+        
+        
+        if (!m.x.contains(m.url)) 
         {
-            m.x.add(url);
+            m.x.add(m.url);
             m.curr++;
         }
         
-        System.out.println(url);
-        System.out.println("Your url is being visited!");
+        System.out.println(m.url+" -->Your url is being visited!");
     }
     public static void isValidURL(String url)
     {
@@ -98,49 +105,50 @@ public class MyClass
         System.out.println("Not valid");
     }
   }
-  public static void bookmarkurl(String url,MyClass m){
+  public static void bookmarkurl(String url,Main m){
     m.y.add(url);
+    System.out.println("Your url is bookmarked!!");
   }
-  public static void goback(MyClass m){
+  public static void goback(Main m){
       if(m.curr>=0){
           m.curr--;
           System.out.println(m.x.get(m.curr));
       }
   }
-  public static void goforward(MyClass m){
+  public static void goforward(Main m){
       if(m.curr<m.x.length()-1){
           m.curr++;
           System.out.println(m.x.get(m.curr));
       }
   }
-  public static void listhistory(MyClass m)
+  public static void listhistory(Main m)
   {
       if(m.x.displayAll()==false){
           System.out.println("Your history is empty!");
       }
   }
-  public static void clearhistory(MyClass m)
+  public static void clearhistory(Main m)
   {
       m.x.clearAll();
       System.out.println("Your browser history is cleared!!");
   }
-  public static void bookmarkedhistory(MyClass m){
+  public static void bookmarkedhistory(Main m){
+      System.out.println("Bookmarked Urls are:\n");
       if(m.y.displayAll()==false){
           System.out.println("Your history is empty!");
       }
   }
   public static void main(String[] args) {
     
-    MyClass x=new MyClass();
+    Main x=new Main();
     InputStreamReader temp0 =new InputStreamReader(System.in);
     BufferedReader b =new BufferedReader(temp0);
+    // Scanner scan=new Scanner(System.in);
        
     try{ 
       while(true)
       {
-        
-        System.out.println("Enter URL");
-        String url = b.readLine();
+        String url;
         System.out.println("1 - visitURL()");
         System.out.println("2 - validateURL()");
         System.out.println("3 - bookmarkURL()");
@@ -149,19 +157,21 @@ public class MyClass
         System.out.println("6 - listHistory()");
         System.out.println("7 - clear History()");
         System.out.println("8 - listBookmarkedUrls()");
+        System.out.println("9 - exit()");
 
         System.out.println("\n****Enter your choice****");
         int ch=Integer.parseInt(b.readLine());
+        // int ch=scan.nextInt();
         switch(ch)
         {
             case 1:
-                visiturl(url,x);
+                visiturl(x);
                 break;
             case 2:
-                isValidURL(url);
+                isValidURL(x.url);
                 break;
             case 3:
-                bookmarkurl(url,x);
+                bookmarkurl(x.url,x);
                 break;
             case 4:
                 goback(x);
@@ -178,19 +188,13 @@ public class MyClass
             case 8:
                 bookmarkedhistory(x);
                 break;
+            case 9:
+                System.exit(0);
+                break;
             default:
                 System.out.println("Invalid choice");
                 break;
         }
-          System.out.println("Do you want to continue? 1/0:");
-
-              if(Integer.parseInt(b.readLine())==1)
-              {
-                 continue;
-              }
-              else{
-                  break;
-              }
         }
   }
   catch(IOException ex){
