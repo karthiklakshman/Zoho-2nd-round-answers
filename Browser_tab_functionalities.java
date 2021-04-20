@@ -84,7 +84,7 @@ public class Main
             m.curr++;
         }
         
-        System.out.println(m.url+" -->Your url is being visited!");
+        System.out.println(m.url+" -->Your url is being visited!\n");
     }
     public static void isValidURL(String url)
     {
@@ -99,15 +99,15 @@ public class Main
     Pattern a = Pattern.compile(currurl);
     Matcher b = a.matcher(url);
     if(b.matches()){
-        System.out.println("valid");
+        System.out.println("valid\n");
     }
     else{
-        System.out.println("Not valid");
+        System.out.println("Not valid\n");
     }
   }
   public static void bookmarkurl(String url,Main m){
     m.y.add(url);
-    System.out.println("Your url is bookmarked!!");
+    System.out.println("Your url is bookmarked!!\n");
   }
   public static void goback(Main m){
       if(m.curr>=0){
@@ -124,18 +124,18 @@ public class Main
   public static void listhistory(Main m)
   {
       if(m.x.displayAll()==false){
-          System.out.println("Your history is empty!");
+          System.out.println("Your history is empty!\n");
       }
   }
   public static void clearhistory(Main m)
   {
       m.x.clearAll();
-      System.out.println("Your browser history is cleared!!");
+      System.out.println("Your browser history is cleared!!\n");
   }
   public static void bookmarkedhistory(Main m){
       System.out.println("Bookmarked Urls are:\n");
       if(m.y.displayAll()==false){
-          System.out.println("Your history is empty!");
+          System.out.println("Your history is empty!\n");
       }
   }
   public static void main(String[] args) {
@@ -143,7 +143,6 @@ public class Main
     Main x=new Main();
     InputStreamReader temp0 =new InputStreamReader(System.in);
     BufferedReader b =new BufferedReader(temp0);
-    // Scanner scan=new Scanner(System.in);
        
     try{ 
       while(true)
@@ -161,7 +160,6 @@ public class Main
 
         System.out.println("\n****Enter your choice****");
         int ch=Integer.parseInt(b.readLine());
-        // int ch=scan.nextInt();
         switch(ch)
         {
             case 1:
